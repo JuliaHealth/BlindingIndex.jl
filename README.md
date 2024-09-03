@@ -1,4 +1,4 @@
-# BlindingIndex
+# BlindingIndex.jl
 
 Compute James' and Bang's Blinding Indices.
 
