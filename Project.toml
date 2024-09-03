@@ -1,0 +1,16 @@
+name = "BlindingIndex"
+uuid = "67be77aa-8e15-4dcd-9068-de5e3adff985"
+authors = ["Adam Wysokinski <adam.wysokinski@umed.lodz.pl> and contributors"]
+version = "0.0.1"
+
+[deps]
+Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"
+
+[compat]
+julia = "1.6.7"
+
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
