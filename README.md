@@ -1,12 +1,27 @@
 # BlindingIndex
 
-[![Build Status](https://github.com/Adam Wysokiński/BlindingIndex.jl/actions/workflows/CI.yml/badge.svg?branch=main)](https://github.com/Adam Wysokiński/BlindingIndex.jl/actions/workflows/CI.yml?query=branch%3Amain)
+Compute James' and Bang's Blinding Indices.
+
+The code is based on R package [BI](https://github.com/marcschwartz/BI) by Marc Schwartz and Nate Mercaldo.
+
+## Usage
 
 ```julia
-bi(x; <keyword arguments>)
+using BlindingIndex
+x = [48 22; 4 30; 330 319]
+bi(x)
 ```
 
-Compute James' and Bang's Blinding Indices.
+Output:
+
+```
+BI James     Estimate     Std. Error   LCL      UCL      2-Sided
+Overall      0.896        0.011        0.875    0.918   
+
+BI Bang      Estimate     Std. Error   LCL      UCL      2-Sided
+Treatment    0.115        0.018        0.08     0.15    
+Placebo      0.022        0.019        -0.016   0.06    
+```
 
 ## Arguments
 
