@@ -15,10 +15,10 @@ bi(x)
 Output:
 
 ```
-BI James     Estimate     Std. Error   LCL      UCL      2-Sided
+BI James     Estimate     Std. Error   LCL      UCL      95% CI, 2-sided
 Overall      0.896        0.011        0.875    0.918   
 
-BI Bang      Estimate     Std. Error   LCL      UCL      2-Sided
+BI Bang      Estimate     Std. Error   LCL      UCL      95% CI, 2-sided
 Treatment    0.115        0.018        0.08     0.15    
 Placebo      0.022        0.019        -0.016   0.06    
 ```
