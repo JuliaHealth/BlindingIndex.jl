@@ -1,7 +1,7 @@
 name = "BlindingIndex"
 uuid = "67be77aa-8e15-4dcd-9068-de5e3adff985"
 authors = ["Adam Wysokinski <adam.wysokinski@umed.lodz.pl> and contributors"]
-version = "0.0.1"
+version = "0.0.2"
 
 [deps]
 Distributions = "31c24e10-a181-5473-b8eb-7969acd0382f"

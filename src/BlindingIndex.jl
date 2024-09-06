@@ -29,17 +29,17 @@ Compute James' and Bang's Blinding Indices.
 # Arguments
 
 - `x::Matrix{Int64}`: 2×2 or 3×2 integer matrix of cross-tabulated counts
-- `weights::Matrix{Float64}=[0 0.5; 0.5 0; 1 1]`: use default 1996 James weights for 3×2 unless alternative weights are specified; correct guesses are assigned a weight of 0, incorrect guesses are assigned a weight of 0.5, don't know guesses are assigned a weight of 1
-- `conf::Float64=0.95`: confidence interval
-- `alternative::Symbol=:two`: whether two-sided (`:two`) (the default) or one-sided (`:less` or `:greater`) confidence intervals are returned
+- `weights::Matrix{Float64}=[0 0.5; 0.5 0; 1 1]`: use default 1996 James weights (correct guesses are assigned a weight of 0, incorrect guesses are assigned a weight of 0.5, don't know guesses are assigned a weight of 1) unless alternative weights are specified
+- `conf::Float64=0.95`: confidence level for the returned confidence intervals
+- `alternative::Symbol=:two`: type of returned confidence interval (two-sided, `:two`) or one-sided (`:less` or `:greater`)
 - `groups::Vector{String}=["Treatment", "Placebo"]`: treatment group names
 - `output::Bool=true`: if true, show the output
 
 # Returns
 
 Named tuple containing:
-- `bi_james`: James' index (overall estimated value, standard error, lower confidence interval bound, upper confidence interval bound)
-- `bi_bang`: Bang's index (estimated value, standard error, lower confidence interval bound, upper confidence interval bound for groups 1 and 2)
+- `bi_james`: James' index: overall estimated value, standard error, lower confidence interval bound, upper confidence interval bound
+- `bi_bang`: Bang's index: estimated values, standard errors, lower confidence interval bounds, upper confidence interval bounds for group 1 and 2
 
 # Notes
 
@@ -50,7 +50,7 @@ Treatment    xxx        xxx
 Placebo      xxx        xxx 
 Don't Know   xxx        xxx
 
-If 2×2 cross-tabulated counts matrix is provided, the last row is filled with zeros. 
+If 2×2 cross-tabulated counts matrix is provided (treatment and placebo rows), the last row (don't know) is filled with zeros.
 
 # Sources
 
@@ -69,12 +69,12 @@ function bi(x::Matrix{Int64}; weights::Matrix{Float64}=[0 0.5; 0.5 0; 1 1], conf
     bbi = bibang(x, weights=weights, conf=conf, alternative=alternative)
 
     if output
-        sided = alternative === :two ? "2-Sided" : "1-Sided"
+        sided = alternative === :two ? "2-sided" : "1-sided"
 
-        println("$(rpad("BI James", 12)) $(rpad("Estimate", 12)) $(rpad("Std. Error", 12)) $(rpad("LCL", 8)) $(rpad("UCL", 8)) $sided")
+        println("$(rpad("BI James", 12)) $(rpad("Estimate", 12)) $(rpad("Std. Error", 12)) $(rpad("LCL", 8)) $(rpad("UCL", 8)) $(round(Int64, conf * 100))% CI, $sided")
         println("$(rpad("Overall", 12)) $(rpad(jbi.bi_est, 12)) $(rpad(jbi.bi_se, 12)) $(rpad(jbi.bi_lcl, 8)) $(rpad(jbi.bi_ucl, 8))")
         println()
-        println("$(rpad("BI Bang", 12)) $(rpad("Estimate", 12)) $(rpad("Std. Error", 12)) $(rpad("LCL", 8)) $(rpad("UCL", 8)) $sided")
+        println("$(rpad("BI Bang", 12)) $(rpad("Estimate", 12)) $(rpad("Std. Error", 12)) $(rpad("LCL", 8)) $(rpad("UCL", 8)) $(round(Int64, conf * 100))% CI, $sided")
         println("$(rpad(groups[1], 12)) $(rpad(bbi.bi_est[1], 12)) $(rpad(bbi.bi_se[1], 12)) $(rpad(bbi.bi_lcl[1], 8)) $(rpad(bbi.bi_ucl[1], 8))")
         println("$(rpad(groups[2], 12)) $(rpad(bbi.bi_est[2], 12)) $(rpad(bbi.bi_se[2], 12)) $(rpad(bbi.bi_lcl[2], 8)) $(rpad(bbi.bi_ucl[2], 8))")
     end
@@ -91,9 +91,9 @@ Compute James' Blinding Indices.
 # Arguments
 
 - `x::Matrix{Int64}`: 2×2 or 3×2 integer matrix of cross-tabulated counts
-- `weights::Matrix{Float64}=[0 0.5; 0.5 0; 1 1]`: use default 1996 James weights for 3×2 unless alternative weights are specified; correct guesses are assigned a weight of 0, incorrect guesses are assigned a weight of 0.5, don't know guesses are assigned a weight of 1
-- `conf::Float64=0.95`: confidence interval
-- `alternative::Symbol=:two`: whether two-sided (`:two`) (the default) or one-sided (`:less` or `:greater`) confidence intervals are returned
+- `weights::Matrix{Float64}=[0 0.5; 0.5 0; 1 1]`: use default 1996 James weights (correct guesses are assigned a weight of 0, incorrect guesses are assigned a weight of 0.5, don't know guesses are assigned a weight of 1) unless alternative weights are specified
+- `conf::Float64=0.95`: confidence level for the returned confidence intervals
+- `alternative::Symbol=:two`: type of returned confidence interval (two-sided, `:two`) or one-sided (`:less` or `:greater`)
 
 # Returns
 
@@ -112,7 +112,7 @@ Treatment    xxx        xxx
 Placebo      xxx        xxx 
 Don't Know   xxx        xxx
 
-If 2×2 cross-tabulated counts matrix is provided, the last row is filled with zeros. 
+If 2×2 cross-tabulated counts matrix is provided, the last row is filled with zeros.
 
 # Sources
 
@@ -193,17 +193,17 @@ Compute Bang's Blinding Indices.
 # Arguments
 
 - `x::Matrix{Int64}`: 2×2 or 3×2 integer matrix of cross-tabulated counts
-- `weights::Matrix{Float64}=[0 0.5; 0.5 0; 1 1]`: use default 1996 James weights for 3×2 unless alternative weights are specified; correct guesses are assigned a weight of 0, incorrect guesses are assigned a weight of 0.5, don't know guesses are assigned a weight of 1
-- `conf::Float64=0.95`: confidence interval
-- `alternative::Symbol=:two`: whether two-sided (`:two`) (the default) or one-sided (`:less` or `:greater`) confidence intervals are returned
+- `weights::Matrix{Float64}=[0 0.5; 0.5 0; 1 1]`: use default 1996 James weights (correct guesses are assigned a weight of 0, incorrect guesses are assigned a weight of 0.5, don't know guesses are assigned a weight of 1) unless alternative weights are specified
+- `conf::Float64=0.95`: confidence level for the returned confidence intervals
+- `alternative::Symbol=:two`: type of returned confidence interval (two-sided, `:two`) or one-sided (`:less` or `:greater`)
 
 # Returns
 
 Named tuple containing:
-- `bi_est::Float64`: estimated value
-- `bi_se::Float64`: standard error
-- `bi_lcl::Float64`: lower confidence interval bound
-- `bi_ucl::Float64`: upper confidence interval bound
+- `bi_est::Float64`: estimated values for group 1 and 2
+- `bi_se::Float64`: standard errors for group 1 and 2
+- `bi_lcl::Float64`: lower confidence interval bounds for group 1 and 2
+- `bi_ucl::Float64`: upper confidence interval bounds for group 1 and 2
 
 # Notes
 
@@ -214,7 +214,7 @@ Treatment    xxx        xxx
 Placebo      xxx        xxx 
 Don't Know   xxx        xxx
 
-If 2×2 cross-tabulated counts matrix is provided, the last row is filled with zeros. 
+If 2×2 cross-tabulated counts matrix is provided, the last row is filled with zeros.
 
 # Sources
 
@@ -261,4 +261,4 @@ function bibang(x::Matrix{Int64}; weights::Matrix{Float64}=[0 0.5; 0.5 0; 1 1], 
 
 end
 
-end
+end # BlindingIndex

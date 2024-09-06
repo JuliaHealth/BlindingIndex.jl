@@ -27,7 +27,7 @@ Placebo      0.022        0.019        -0.016   0.06
 
 - `x::Matrix{Int64}`: 2×2 or 3×2 integer matrix of cross-tabulated counts
 - `weights::Matrix{Float64}=[0 0.5; 0.5 0; 1 1]`: use default 1996 James weights for 3×2 unless alternative weights are specified; correct guesses are assigned a weight of 0, incorrect guesses are assigned a weight of 0.5, don't know guesses are assigned a weight of 1
-- `conf::Float64=0.95`: confidence interval
+- `conf::Float64=0.95`: confidence level for the returned confidence intervals
 - `alternative::Symbol=:two`: whether two-sided (`:two`) (the default) or one-sided (`:less` or `:greater`) confidence intervals are returned
 - `groups::Vector{String}=["Treatment", "Placebo"]`: treatment group names
 - `output::Bool=true`: if true, show the output
@@ -36,7 +36,7 @@ Placebo      0.022        0.019        -0.016   0.06
 
 Named tuple containing:
 - `bi_james`: James' index (overall estimated value, standard error, lower confidence interval bound, upper confidence interval bound)
-- `bi_bang`: Bang's index (estimated value, standard error, lower confidence interval bound, upper confidence interval bound for groups 1 and 2)
+- `bi_bang`: Bang's index (estimated values, standard errors, lower confidence interval bounds, upper confidence interval bounds for group 1 and 2)
 
 ## Notes
 
@@ -49,7 +49,7 @@ Placebo      xxx        xxx
 Don't Know   xxx        xxx
 ```
 
-If 2×2 cross-tabulated counts matrix is provided, the last row is filled with zeros. 
+If 2×2 cross-tabulated counts matrix is provided, the last row is filled with zeros.
 
 ## Sources
 
