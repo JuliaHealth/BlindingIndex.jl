@@ -51,6 +51,26 @@ Don't Know   xxx        xxx
 
 If 2×2 cross-tabulated counts matrix is provided, the last row is filled with zeros.
 
+## Interpreting the results
+
+In the cross-tabulated counts, rows are the participants' guesses and columns are the arms they were actually assigned to.
+
+James' index summarises blinding for the whole trial and ranges from 0 to 1:
+- 1 means complete blinding (every participant answered "don't know")
+- 0.5 means participants guessed no better than chance
+- 0 means complete unblinding (every participant guessed correctly)
+
+If the upper confidence limit is below 0.5, the trial can be considered unblinded.
+
+Bang's index is calculated separately for each arm and ranges from -1 to 1:
+- 0 means guesses in that arm were consistent with random guessing
+- 1 means every participant in that arm guessed their assignment correctly
+- -1 means every participant in that arm guessed the opposite assignment
+
+A confidence interval that excludes 0 suggests that participants in that arm were more likely to guess correctly (positive values) or incorrectly (negative values) than chance.
+
+In the example above, James' index of 0.896 indicates the trial was well blinded overall. Bang's index is close to 0 in the placebo arm, while the treatment arm shows a slight tendency towards correct guessing (0.115, 95% CI 0.08 to 0.15).
+
 ## Sources
 
 1. James KE, Bloch DA, Lee KK, Kraemer HC, Fuller RK. An index for assessing blindness in a multi-centre clinical trial: disulfiram for alcohol cessation--a VA cooperative study. Stat Med. 1996 Jul 15;15(13):1421-34. doi: 10.1002/(SICI)1097-0258(19960715)15:13<1421::AID-SIM266>3.0.CO;2-H. PMID: 8841652.
