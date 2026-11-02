@@ -40,7 +40,7 @@ Named tuple containing:
 
 ## Notes
 
-The format of the cross-tabulated counts and weights is:
+The format of the cross-tabulated counts and weights is shown below. Rows are the guesses and columns are the actual assignments. The rows and columns must be in the same order, so row 1 is the guess for the arm in column 1. The `groups` argument only changes the printed labels and does not reorder the data.
 
 ```
              Treatment  Placebo
@@ -50,6 +50,8 @@ Don't Know   xxx        xxx
 ```
 
 If 2×2 cross-tabulated counts matrix is provided, the last row is filled with zeros.
+
+Swapping only the columns gives incorrect results. For example, `bibang([20 5; 10 15; 0 0])` returns `[0.333, 0.5]`, while `bibang([5 20; 15 10; 0 0])` returns `[-0.5, -0.333]` instead of the same values in reverse order. To put placebo first, swap both the rows and the columns: `bibang([15 10; 5 20; 0 0])` returns `[0.5, 0.333]`.
 
 ## Sources
 
