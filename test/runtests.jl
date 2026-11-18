@@ -10,5 +10,6 @@ using Test
     @test ncol(x) == 2
     @test bijames(x) == (bi_est = 0.896, bi_se = 0.011, bi_lcl = 0.875, bi_ucl = 0.918)
     @test bibang(x) == (bi_est = [0.115, 0.022], bi_se = [0.018, 0.019], bi_lcl = [0.08, -0.016], bi_ucl = [0.15, 0.06])
+    @test bijames([0 0; 0 0; 50 50]) == (bi_est = 1.0, bi_se = 0.0, bi_lcl = 1.0, bi_ucl = 1.0)
     
 end

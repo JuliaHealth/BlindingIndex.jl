@@ -129,7 +129,7 @@ function bijames(x::Matrix{Int64}; weights::Matrix{Float64}=[0 0.5; 0.5 0; 1 1],
 
     @assert conf > 0.0 && conf < 1.0 "conf must be > 0 and < 1"
 
-    if x[1:2, :] == [0, 0] && all(i -> i > 0, x[3, :])
+    if all(iszero, x[1:2, :]) && all(i -> i > 0, x[3, :])
         bi_est = 1
         bi_se = 0
     else
